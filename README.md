@@ -14,7 +14,7 @@ You can simply:
 
 
 
-## Folder structure
+## Folder structure.
 
 * There are prepared several basic folders such as 'Models' and 'Prefabs', comonly used for projects in Unity editor. 
 
