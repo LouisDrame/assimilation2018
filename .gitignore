@@ -4,7 +4,10 @@ Library
 Temp
 obj
 Assets/Scenes
+<<<<<<< #2ProtoVoiture
 
+=======
+>>>>>>> Change Gitignore
 # Folders designed to be part of repository, but not their content
 
 /_NonVersioned/*
