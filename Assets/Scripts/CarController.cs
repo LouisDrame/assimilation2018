@@ -53,14 +53,12 @@ public class CarController : MonoBehaviour
             transform.Rotate(Vector3.forward * turnpower);
             GameObject.Find("WPTrail1").GetComponent<TrailRenderer>().emitting = true;
             GameObject.Find("WPTrail2").GetComponent<TrailRenderer>().emitting = true;
-            cam.GetComponent<TestScreenShake>().TriggerShake();
         }
         if (Input.GetKey(KeyCode.D))
         {
             transform.Rotate(Vector3.forward * -turnpower);
             GameObject.Find("WPTrail1").GetComponent<TrailRenderer>().emitting = true;
             GameObject.Find("WPTrail2").GetComponent<TrailRenderer>().emitting = true;
-            cam.GetComponent<TestScreenShake>().TriggerShake();
 
         }
     }
