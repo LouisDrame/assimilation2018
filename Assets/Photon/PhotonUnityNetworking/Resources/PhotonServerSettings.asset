@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 
+    AppIdRealtime: 8a2d8135-9f96-45e9-add6-22335708e1f3
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
@@ -25,9 +25,12 @@ MonoBehaviour:
     EnableLobbyStatistics: 0
     NetworkLogging: 1
   StartInOfflineMode: 0
-  PunLogging: 0
+  PunLogging: 2
   EnableSupportLogger: 0
   RunInBackground: 1
-  RpcList: []
-  DisableAutoOpenWizard: 0
+  RpcList:
+  - DestroySpaceship
+  - Fire
+  - RespawnSpaceship
+  DisableAutoOpenWizard: 1
   ShowSettings: 0
