@@ -9,13 +9,14 @@ public class CarController : MonoBehaviour
     public float accelMax = 3;
     public float currentacel = 1f;
     public float accelGap = 0.01f;
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody rigidbody;
     private Vector2 carSpeed;
+
 
 
     private void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -30,36 +31,53 @@ public class CarController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Z))
         {
-            rigidbody2D.AddForce(transform.up * power * currentacel);
-            rigidbody2D.drag = friction;
-            // if (currentacel <= accelMax)
-            // {
-            //     currentacel += accelGap;
-            // }
+            Up();
         }
-        // else
-        // {
-        //     if(currentacel > 0){
-        //         currentacel -= accelGap;
-        //     }
-        // }
         if (Input.GetKey(KeyCode.S))
         {
-            rigidbody2D.AddForce(-(transform.up) * (power / 2));
-            rigidbody2D.drag = friction;
+            Down();
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            transform.Rotate(Vector3.forward * turnpower);
-            GameObject.Find("WPTrail1").GetComponent<TrailRenderer>().emitting = true;
-            GameObject.Find("WPTrail2").GetComponent<TrailRenderer>().emitting = true;
+            Left();
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(Vector3.forward * -turnpower);
+            Right();
+        }
+    }
+
+    public void Up()
+    {
+        rigidbody.AddForce(transform.forward * power);
+        rigidbody.drag = friction;
+    }
+
+    public void Down()
+    {
+        rigidbody.AddForce(-(transform.forward) * (power / 2));
+        rigidbody.drag = friction;
+    }
+
+    public void Left()
+    {
+        if (GetComponent<Rigidbody>().velocity.x != 0 || GetComponent<Rigidbody>().velocity.z != 0)
+        {
+
+            transform.Rotate(Vector3.up  * -turnpower);
             GameObject.Find("WPTrail1").GetComponent<TrailRenderer>().emitting = true;
             GameObject.Find("WPTrail2").GetComponent<TrailRenderer>().emitting = true;
+        }
+    }
 
+    public void Right()
+    {
+        Debug.Log("Rotate called");
+        if (GetComponent<Rigidbody>().velocity.x != 0 || GetComponent<Rigidbody>().velocity.z != 0)
+        {
+            transform.Rotate(Vector3.up * turnpower);
+            GameObject.Find("WPTrail1").GetComponent<TrailRenderer>().emitting = true;
+            GameObject.Find("WPTrail2").GetComponent<TrailRenderer>().emitting = true;
         }
     }
 }
