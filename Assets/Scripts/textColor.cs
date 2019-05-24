@@ -7,21 +7,23 @@ public class textColor : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
   public Text theText;
 
+  private void Start() {
+    theText.color = new Color32(205,0,85,255); 
+  }
+
   public void OnPointerEnter (PointerEventData eventData) {
-    theText.color =  new Color32(205,0,85,255); //Or however you do your color
-    Debug.Log("Enter");
+    theText.color =  new Color32(205,0,85,255); 
   }
 
   public void OnPointerExit (PointerEventData eventData) {
-    theText.color = new Color32(208,54,126,255); //Or however you do your color
-    Debug.Log("Exit");
+    theText.color = new Color32(208,54,126,255); 
   }
 
   public void OnPointerDown (PointerEventData eventData) {
-    theText.color = new Color32(110,18,115,255); //Or however you do your color
+    theText.color = new Color32(110,18,115,255); 
   }
 
   public void OnPointerUp (PointerEventData eventData) {
-    theText.color = new Color32(205,0,85,255); //Or however you do your color
+    theText.color = new Color32(205,0,85,255); 
   }
 }
