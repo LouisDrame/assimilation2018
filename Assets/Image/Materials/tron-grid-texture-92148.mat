@@ -7,15 +7,16 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YELLOW NEON
-  m_Shader: {fileID: 4800000, guid: 6babf069b068f4471a95062b0ecbe96c, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_Name: tron-grid-texture-92148
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -44,10 +45,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_400A7C2D: 0.09
-    - Vector1_8E59D7AB: 0.98
-    - Vector1_B7EFFF3E: 3.13
-    - Vector1_D221DF2E: 0.98
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -67,8 +64,6 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_196409F4: {r: 5.0276623, g: 5.289933, b: 0.3243828, a: 0}
-    - Color_F2FC49D6: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

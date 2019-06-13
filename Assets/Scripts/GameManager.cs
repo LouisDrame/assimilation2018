@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviourPunCallbacks {
 
   [Tooltip ("The prefab to use for representing the player")]
-  public GameObject playerPrefab;
   public Transform StartPos;
   private GameObject InstantiateCar;
 
@@ -26,7 +25,13 @@ public class GameManager : MonoBehaviourPunCallbacks {
   #region Public Methods
 
   private void Start () {
-    InstantiateCar = PhotonNetwork.Instantiate (playerPrefab.name, StartPos.position, Quaternion.identity, 0);
+    if (PhotonNetwork.IsMasterClient) {
+      InstantiateCar = PhotonNetwork.Instantiate ("Police", StartPos.position, Quaternion.identity, 0);
+    } else {
+      InstantiateCar = PhotonNetwork.Instantiate ("Bandit", StartPos.position, Quaternion.identity, 0);
+    }
+    //GameObject.Find("/topDownCar/tron/Plane001").GetComponent<MeshRenderer>().material.SetColor("_Color",Color.red);
+    //rend = GetComponent<Renderer>();
   }
 
   public void LeaveRoom () {
