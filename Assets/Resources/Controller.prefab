@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b507c19bd254fa48965159c15dbbae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 70
+  power: 100
   maxspeed: 17.4
   turnpower: 3.5
   friction: 3
