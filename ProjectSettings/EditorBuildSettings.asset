@@ -8,3 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Main.unity
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Launcher.unity
+    guid: 42c4e1cb3df8428418467b50c68905c5
+  - enabled: 1
+    path: Assets/Scenes/ProtoVoiture.unity
+    guid: f56ab541c1f18cf40821fa25bf7eedf6
+  m_configObjects: {}

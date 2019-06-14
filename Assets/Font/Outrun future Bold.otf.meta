@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: f0e62b12cb70f6649b2c592b3ec00fa1
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Outrun future
+  fontNames:
+  - Outrun future
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 95217cb77bd2e7c4087f7016ef23c3d3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
