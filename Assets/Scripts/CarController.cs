@@ -22,8 +22,8 @@ public class CarController : MonoBehaviourPun {
 
   private void FixedUpdate () {
     if (photonView.IsMine) {
-      GameObject.Find ("WPTrail1").GetComponent<TrailRenderer> ().emitting = false;
-      GameObject.Find ("WPTrail2").GetComponent<TrailRenderer> ().emitting = false;
+      GameObject.Find ("Trail").GetComponent<TrailRenderer> ().emitting = true;
+      // GameObject.Find ("WPTrail2").GetComponent<TrailRenderer> ().emitting = false;
       if (carSpeed.magnitude > maxspeed) {
         carSpeed = carSpeed.normalized;
         carSpeed *= maxspeed;
@@ -58,8 +58,8 @@ public class CarController : MonoBehaviourPun {
     if (GetComponent<Rigidbody> ().velocity.x != 0 || GetComponent<Rigidbody> ().velocity.z != 0) {
 
       transform.Rotate (Vector3.up * -turnpower);
-      GameObject.Find ("WPTrail1").GetComponent<TrailRenderer> ().emitting = true;
-      GameObject.Find ("WPTrail2").GetComponent<TrailRenderer> ().emitting = true;
+      // GameObject.Find ("Trail").GetComponent<TrailRenderer> ().emitting = true;
+      // GameObject.Find ("WPTrail2").GetComponent<TrailRenderer> ().emitting = true;
     }
   }
 
@@ -67,8 +67,8 @@ public class CarController : MonoBehaviourPun {
     Debug.Log ("Rotate called");
     if (GetComponent<Rigidbody> ().velocity.x != 0 || GetComponent<Rigidbody> ().velocity.z != 0) {
       transform.Rotate (Vector3.up * turnpower);
-      GameObject.Find ("WPTrail1").GetComponent<TrailRenderer> ().emitting = true;
-      GameObject.Find ("WPTrail2").GetComponent<TrailRenderer> ().emitting = true;
+      // GameObject.Find ("Trail").GetComponent<TrailRenderer> ().emitting = true;
+      // GameObject.Find ("WPTrail2").GetComponent<TrailRenderer> ().emitting = true;
     }
   }
 }
