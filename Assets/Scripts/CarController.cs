@@ -1,8 +1,10 @@
 ﻿using Photon.Pun;
 using UnityEngine;
+using System.Collections;
 
 public class CarController : MonoBehaviourPun {
   public float power = 3;
+  public float maxPower = 100;
   public float maxspeed = 5;
   public float turnpower = 2;
   public float friction = 3;
@@ -11,6 +13,7 @@ public class CarController : MonoBehaviourPun {
   public float accelGap = 0.01f;
   private Rigidbody rigidbody;
   private Vector2 carSpeed;
+  private float savePower;
 
   private void Start () {
     if (photonView.IsMine) {
@@ -71,4 +74,15 @@ public class CarController : MonoBehaviourPun {
       // GameObject.Find ("WPTrail2").GetComponent<TrailRenderer> ().emitting = true;
     }
   }
+  
+  public void lancerCoroutine(float duration, float newPower){
+	  StartCoroutine(applyPowerUp(duration,newPower));
+  }
+  
+  public IEnumerator applyPowerUp(float duration, float newPower){
+	this.power = newPower;
+    yield return new WaitForSeconds(duration);
+    this.power = maxPower;
+  }
+  
 }

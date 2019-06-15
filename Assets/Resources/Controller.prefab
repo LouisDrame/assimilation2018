@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 5453599155714512787}
   m_Layer: 0
   m_Name: Controller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b507c19bd254fa48965159c15dbbae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 200
+  power: 100
   maxspeed: 17.4
   turnpower: 3.5
   friction: 3
@@ -169,7 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc0a2c0c6db7c541ac48fc3f23acd43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 0}
 --- !u!114 &6998356649834643037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,10 +408,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6054428472370110328}
     m_Modifications:
-    - target: {fileID: 100050, guid: ebf055516f0e54cb3a91f19d4032a117, type: 3}
-      propertyPath: m_Name
-      value: tron
-      objectReference: {fileID: 0}
     - target: {fileID: 400050, guid: ebf055516f0e54cb3a91f19d4032a117, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -464,6 +459,10 @@ PrefabInstance:
     - target: {fileID: 400050, guid: ebf055516f0e54cb3a91f19d4032a117, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 100050, guid: ebf055516f0e54cb3a91f19d4032a117, type: 3}
+      propertyPath: m_Name
+      value: tron
       objectReference: {fileID: 0}
     - target: {fileID: 2300046, guid: ebf055516f0e54cb3a91f19d4032a117, type: 3}
       propertyPath: m_Materials.Array.data[0]
