@@ -31,4 +31,4 @@ Material:
     m_Colors:
     - Color_7F6D94C2: {r: 1, g: 0, b: 0.8524437, a: 0}
     - Color_F7006F30: {r: 1, g: 0, b: 0.8792534, a: 0}
-    - Vector2_2D0E5707: {r: 700, g: 700, b: 0, a: 0}
+    - Vector2_2D0E5707: {r: 200, g: 200, b: 0, a: 0}

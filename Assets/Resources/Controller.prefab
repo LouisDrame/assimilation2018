@@ -100,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 6054428472370110333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.38, y: 0, z: 5.79}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 9188471210749874943}
   - {fileID: 317694792212618428}
@@ -121,13 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b507c19bd254fa48965159c15dbbae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 100
-  maxspeed: 17.4
+  power: 0
+  maxPower: 100
+  minPower: 100
+  basMinPower: 100
+  accelerationValueFloat: 100
   turnpower: 3.5
   friction: 3
-  accelMax: 3
-  currentacel: 1
-  accelGap: 0.01
 --- !u!54 &6054428472370110335
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &6054428472370110332
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -347,7 +347,7 @@ TrailRenderer:
   m_Time: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.3
+    widthMultiplier: 0.8
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -408,6 +408,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6054428472370110328}
     m_Modifications:
+    - target: {fileID: 100050, guid: ebf055516f0e54cb3a91f19d4032a117, type: 3}
+      propertyPath: m_Name
+      value: tron
+      objectReference: {fileID: 0}
     - target: {fileID: 400050, guid: ebf055516f0e54cb3a91f19d4032a117, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -459,10 +463,6 @@ PrefabInstance:
     - target: {fileID: 400050, guid: ebf055516f0e54cb3a91f19d4032a117, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 100050, guid: ebf055516f0e54cb3a91f19d4032a117, type: 3}
-      propertyPath: m_Name
-      value: tron
       objectReference: {fileID: 0}
     - target: {fileID: 2300046, guid: ebf055516f0e54cb3a91f19d4032a117, type: 3}
       propertyPath: m_Materials.Array.data[0]
