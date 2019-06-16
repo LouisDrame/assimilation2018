@@ -2,87 +2,106 @@
 using UnityEngine;
 using System.Collections;
 
-public class CarController : MonoBehaviourPun {
-  public float power = 3;
-  public float maxPower = 100;
-  public float maxspeed = 5;
-  public float turnpower = 2;
-  public float friction = 3;
-  public float accelMax = 3;
-  public float currentacel = 1f;
-  public float accelGap = 0.01f;
-  private Rigidbody rigidbody;
-  private Vector2 carSpeed;
-  private float savePower;
+public class CarController : MonoBehaviourPun
+{
+    public float power; /*!< Puissance courante du véhicule, est initialisée à la valeur prise par minPower en début de jeu */
+    public float maxPower = 100; /*!< Puissance maximum courante du véhicule, peut être modifiée par les bonus, la puissance courante du véhicule ne peut pas dépasser cette valeur */
+    private float baseMaxPower = 100; /*!< Puissance max, utilisée pour garder une trace de la puissance maximum du véhicule en dehors des bonus */
+    public float minPower = 50; /*!< Puissance minimale utilisée quand le véhicule démarre, la valeur de puissance courante diminue vers cette valeur dès que le joueur n'accélère pas (Touche Z) */
+    public float basMinPower = 50;
+    public float accelerationValueFloat = 30f; /*!< Valeur d'accélération */
+    public float turnpower = 2;
+    public float friction = 3;
+    private Rigidbody rigidbody;
+    private float savePower;
 
-  private void Start () {
-    if (photonView.IsMine) {
-      rigidbody = GetComponent<Rigidbody> ();
-      gameObject.GetComponent<CameraWork> ().OnStartFollowing ();
+    private void Start()
+    {
+        if (photonView.IsMine)
+        {
+            GameObject.Find("Trail").GetComponent<TrailRenderer>().emitting = true;
+            rigidbody = GetComponent<Rigidbody>();
+            gameObject.GetComponent<CameraWork>().OnStartFollowing();
+            power = minPower;
+        }
+
     }
 
-  }
+    private void FixedUpdate()
+    {
+        if (photonView.IsMine)
+        {
 
-  private void FixedUpdate () {
-    if (photonView.IsMine) {
-      GameObject.Find ("Trail").GetComponent<TrailRenderer> ().emitting = true;
-      // GameObject.Find ("WPTrail2").GetComponent<TrailRenderer> ().emitting = false;
-      if (carSpeed.magnitude > maxspeed) {
-        carSpeed = carSpeed.normalized;
-        carSpeed *= maxspeed;
-      }
-
-      if (Input.GetKey (KeyCode.Z)) {
-        Up ();
-      }
-      if (Input.GetKey (KeyCode.S)) {
-        Down ();
-      }
-      if (Input.GetKey (KeyCode.Q)) {
-        Left ();
-      }
-      if (Input.GetKey (KeyCode.D)) {
-        Right ();
-      }
+            if (Input.GetKey(KeyCode.Z))
+            {
+                Up();
+                power += accelerationValueFloat * Time.fixedDeltaTime;
+                if(power >= maxPower){
+                  power = maxPower;
+                }
+            }
+            else {
+              power -= accelerationValueFloat*2 * Time.fixedDeltaTime;
+              if(power <= minPower){
+                power = minPower;
+              }
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                Down();
+            }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                Left();
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                Right();
+            }
+            Debug.Log("Current power :" + power);
+        }
     }
-  }
 
-  public void Up () {
-    rigidbody.AddForce (transform.forward * power);
-    rigidbody.drag = friction;
-  }
-
-  public void Down () {
-    rigidbody.AddForce (-(transform.forward) * (power / 2));
-    rigidbody.drag = friction;
-  }
-
-  public void Left () {
-    if (GetComponent<Rigidbody> ().velocity.x != 0 || GetComponent<Rigidbody> ().velocity.z != 0) {
-
-      transform.Rotate (Vector3.up * -turnpower);
-      // GameObject.Find ("Trail").GetComponent<TrailRenderer> ().emitting = true;
-      // GameObject.Find ("WPTrail2").GetComponent<TrailRenderer> ().emitting = true;
+    public void Up()
+    {
+        rigidbody.AddForce(transform.forward * power);
+        rigidbody.drag = friction;
     }
-  }
 
-  public void Right () {
-    Debug.Log ("Rotate called");
-    if (GetComponent<Rigidbody> ().velocity.x != 0 || GetComponent<Rigidbody> ().velocity.z != 0) {
-      transform.Rotate (Vector3.up * turnpower);
-      // GameObject.Find ("Trail").GetComponent<TrailRenderer> ().emitting = true;
-      // GameObject.Find ("WPTrail2").GetComponent<TrailRenderer> ().emitting = true;
+    public void Down()
+    {
+        rigidbody.AddForce(-(transform.forward) * (power / 2));
+        rigidbody.drag = friction;
     }
-  }
-  
-  public void lancerCoroutine(float duration, float newPower){
-	  StartCoroutine(applyPowerUp(duration,newPower));
-  }
-  
-  public IEnumerator applyPowerUp(float duration, float newPower){
-	this.power = newPower;
-    yield return new WaitForSeconds(duration);
-    this.power = maxPower;
-  }
-  
+
+    public void Left()
+    {
+        if (GetComponent<Rigidbody>().velocity.x != 0 || GetComponent<Rigidbody>().velocity.z != 0)
+        {
+            transform.Rotate(Vector3.up * -turnpower);
+        }
+    }
+
+    public void Right()
+    {
+        if (GetComponent<Rigidbody>().velocity.x != 0 || GetComponent<Rigidbody>().velocity.z != 0)
+        {
+            transform.Rotate(Vector3.up * turnpower);
+        }
+    }
+
+    public void lancerCoroutine(float duration, float newPower)
+    {
+        StartCoroutine(applyPowerUp(duration, newPower));
+    }
+
+    public IEnumerator applyPowerUp(float duration, float newPower)
+    {
+        this.maxPower = newPower;
+        this.power = maxPower;
+        yield return new WaitForSeconds(duration);
+        this.maxPower = baseMaxPower;
+        this.power = baseMaxPower;
+    }
+
 }
