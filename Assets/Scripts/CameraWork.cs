@@ -19,7 +19,7 @@ public class CameraWork : MonoBehaviour
     {
         if (isFollowing)
         {
-            cameraTransform.position = new Vector3(gameObject.transform.position.x, 14f, gameObject.transform.position.z);
+            cameraTransform.position = new Vector3(gameObject.transform.position.x, 40f, gameObject.transform.position.z);
         }
     }
 
