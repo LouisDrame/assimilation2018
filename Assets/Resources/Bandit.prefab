@@ -35,7 +35,7 @@ PrefabInstance:
     - target: {fileID: 6054428472370110334, guid: 8dc549bdeb52e4a4bab7f01f3dd9d48d,
         type: 3}
       propertyPath: maxPower
-      value: 400
+      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 6054428472370110334, guid: 8dc549bdeb52e4a4bab7f01f3dd9d48d,
         type: 3}
@@ -45,12 +45,12 @@ PrefabInstance:
     - target: {fileID: 6054428472370110334, guid: 8dc549bdeb52e4a4bab7f01f3dd9d48d,
         type: 3}
       propertyPath: minPower
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6054428472370110334, guid: 8dc549bdeb52e4a4bab7f01f3dd9d48d,
         type: 3}
       propertyPath: basMinPower
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6054428472370110328, guid: 8dc549bdeb52e4a4bab7f01f3dd9d48d,
         type: 3}

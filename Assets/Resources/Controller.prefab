@@ -80,10 +80,10 @@ GameObject:
   - component: {fileID: 6054428472370110328}
   - component: {fileID: 6054428472370110334}
   - component: {fileID: 6054428472370110335}
-  - component: {fileID: 6054428472370110332}
   - component: {fileID: 9174287146493815306}
   - component: {fileID: 6998356649834643037}
   - component: {fileID: 5453599155714512787}
+  - component: {fileID: 2920844762550582287}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Player
@@ -144,19 +144,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 1
---- !u!65 &6054428472370110332
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6054428472370110333}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.4383097, y: 0.3351822, z: 2.7596483}
-  m_Center: {x: 0.016731262, y: 0.044442177, z: -0.17537165}
 --- !u!114 &9174287146493815306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +193,20 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!136 &2920844762550582287
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6054428472370110333}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.1852452
+  m_Height: 6.478123
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.41513467, z: -0.36887574}
 --- !u!1 &7869983971811143609
 GameObject:
   m_ObjectHideFlags: 0
