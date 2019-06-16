@@ -36,15 +36,18 @@ public class CarController : MonoBehaviourPun
             {
                 Up();
                 power += accelerationValueFloat * Time.fixedDeltaTime;
-                if(power >= maxPower){
-                  power = maxPower;
+                if (power >= maxPower)
+                {
+                    power = maxPower;
                 }
             }
-            else {
-              power -= accelerationValueFloat*2 * Time.fixedDeltaTime;
-              if(power <= minPower){
-                power = minPower;
-              }
+            else
+            {
+                power -= accelerationValueFloat * 2 * Time.fixedDeltaTime;
+                if (power <= minPower)
+                {
+                    power = minPower;
+                }
             }
             if (Input.GetKey(KeyCode.S))
             {
@@ -58,7 +61,7 @@ public class CarController : MonoBehaviourPun
             {
                 Right();
             }
-            Debug.Log("Current power :" + power);
+            // Debug.Log("Current power :" + power);
         }
     }
 

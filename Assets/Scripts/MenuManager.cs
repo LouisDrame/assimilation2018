@@ -12,25 +12,27 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         buttonClicked = GetComponent<Button>();
-        if(quit){
+        if (quit)
+        {
             buttonClicked.onClick.AddListener(QuitGame);
         }
-        else{
+        else
+        {
             buttonClicked.onClick.AddListener(GoToMenu);
         }
     }
 
-    private void QuitGame(){
+    private void QuitGame()
+    {
         Debug.Log("Quit App");
         Application.Quit();
     }
 
-    private void GoToMenu(){
-        // SceneManager.LoadScene(0);
-        PhotonNetwork.LeaveRoom();
-    }
-
-    void OnLeftRoom(){
-        SceneManager.LoadScene(0);
+    private void GoToMenu()
+    {
+        if (GameObject.Find("Game Manager"))
+        {
+            GameObject.Find("Game Manager").GetComponent<GameManager>().QuitToMenu();
+        }
     }
 }
