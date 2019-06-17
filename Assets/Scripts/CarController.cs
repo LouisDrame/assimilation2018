@@ -12,6 +12,8 @@ public class CarController : MonoBehaviourPun
     public float accelerationValueFloat = 30f; /*!< Valeur d'accélération */
     public float turnpower = 2;
     public float friction = 3;
+    public float isTrigger;
+    public bool isBandit;
     private Rigidbody rigidbody;
     private float savePower;
 
