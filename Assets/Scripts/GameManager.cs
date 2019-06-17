@@ -3,6 +3,7 @@ using System.Collections;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     [Tooltip("The prefab to use for representing the player")]
     public Transform StartPosCop, StartPosThief;
     private GameObject InstantiateCar;
+    public GameObject winUI, loseUI, startUI;
+    public AudioSource source;
+    public AudioClip loseSound, winSound,gameSound;
 
     #region Photon Callbacks
 
@@ -38,7 +42,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         else
         {
             InstantiateCar = PhotonNetwork.Instantiate("Bandit", StartPosThief.position, Quaternion.identity, 0);
-            PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable(){{"GameStart",true}});
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable() { { "GameStart", true } });
         }
     }
 
@@ -73,22 +77,108 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
-    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged){
+    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
+    {
         object gameStart = propertiesThatChanged["GameStart"];
         object gameStartForCop = propertiesThatChanged["GameStartForCop"];
-        if(gameStart is bool && (bool) gameStart){
-            Debug.Log("Debut du jeu");
-            if(InstantiateCar.GetComponent<CarController>().isBandit){
+        object banditWin = propertiesThatChanged["BanditWin"];
+        object copWin = propertiesThatChanged["CopWin"];
+
+        if (gameStart is bool && (bool)gameStart)
+        {
+            // Debug.Log("Debut du jeu");
+            // if (InstantiateCar.GetComponent<CarController>().isBandit)
+            // {
+            //     InstantiateCar.GetComponent<CarController>().EnableInput();
+            // }
+            StartCoroutine(GameStartCoroutine());
+
+        }
+
+        if (gameStartForCop is bool && (bool)gameStartForCop)
+        {
+            if (!InstantiateCar.GetComponent<CarController>().isBandit)
+            {
                 InstantiateCar.GetComponent<CarController>().EnableInput();
+                StartCoroutine(GoForCop());
             }
         }
 
-        if(gameStartForCop is bool && (bool)gameStartForCop){
-            if(!InstantiateCar.GetComponent<CarController>().isBandit){
-                InstantiateCar.GetComponent<CarController>().EnableInput();
+        if (banditWin is bool && (bool)banditWin)
+        {
+            if (InstantiateCar.GetComponent<CarController>().isBandit)
+            {
+                winUI.SetActive(true);
+                source.Stop();
+                source.clip = winSound;
+                source.Play();
+
             }
+            else
+            {
+                loseUI.SetActive(true);
+                source.Stop();
+                source.clip = loseSound;
+                source.Play();
+            }
+            InstantiateCar.GetComponent<CarController>().DisableInput();
         }
 
+        //Gestion de la victoire d'un policier
+        if (copWin is bool && (bool)copWin)
+        {
+            if (InstantiateCar.GetComponent<CarController>().isBandit)
+            {
+                loseUI.SetActive(true);
+                source.Stop();
+                source.clip = loseSound;
+                source.Play();
+            }
+            else
+            {
+                winUI.SetActive(true);
+                source.Stop();
+                source.clip = winSound;
+                source.Play();
+            }
+            InstantiateCar.GetComponent<CarController>().DisableInput();
+        }
+
+    }
+
+    IEnumerator GameStartCoroutine()
+    {
+        source.clip = gameSound;
+        source.Play();
+        startUI.GetComponent<Text>().text = "Prêt ? ";
+        for (int i = 5; i > 0; i--)
+        {
+            startUI.GetComponent<Text>().text = i.ToString();
+            yield return new WaitForSeconds(1);
+        }
+        if (InstantiateCar.GetComponent<CarController>().isBandit)
+        {
+            InstantiateCar.GetComponent<CarController>().EnableInput();
+            startUI.GetComponent<Text>().text = "Go!";
+            yield return new WaitForSeconds(1);
+            startUI.SetActive(false);
+        }
+        else
+        {
+            startUI.GetComponent<Text>().text = "...";
+        }
+    }
+
+    IEnumerator GoForCop()
+    {
+        startUI.GetComponent<Text>().text = "Go!";
+        yield return new WaitForSeconds(1);
+        startUI.SetActive(false);
+    }
+
+    public void SetRoomProperty(string propertyName, bool value)
+    {
+        PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable() { { propertyName, value } });
     }
     #endregion
 }
