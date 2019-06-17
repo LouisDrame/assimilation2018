@@ -9,8 +9,8 @@ public class Booster1 : MonoBehaviour
 	
 	void OnCollisionEnter(Collision collision)
     {
+		//GetComponent<particule>().enabled;
 		collision.gameObject.GetComponent<CarController>().lancerCoroutine(countdown,vitesse);
-		//StartCoroutine(collision.gameObject.GetComponent<CarController>().applyPowerUp(countdown,vitesse));
 		Destroy(gameObject);
     }
 
