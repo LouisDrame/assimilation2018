@@ -18,7 +18,7 @@ public class CarController : MonoBehaviourPun, IPunInstantiateMagicCallback
     private bool inverse = false; /* Utilisé pour les power up, permet d'inverses les commandes gauche/droite du véhicule */
     private bool powerUp = false; /* Utilsié pour savoir si le véhicule est sous l'effet d'un power up */
     private float backPower = 200; /* Force utilisée pour les marche-arrière du véhicule */
-    private bool gameEnded = false; //Vérification rapide pour savoir si la collision avec le policer a déjà été détectée, dans ce cas la détection de collision de s'effectue plus
+    private bool gameEnded = false; //Vérification rapide pour savoir si la collision avec le policer a déjà été détectée, dans ce cas la détection de collision de s'effectue pluss
 
     private void Start()
     {
