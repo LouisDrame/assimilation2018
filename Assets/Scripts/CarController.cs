@@ -17,6 +17,7 @@ public class CarController : MonoBehaviourPun, IPunInstantiateMagicCallback
     private Rigidbody rigidbody;
     private float savePower;
 	private bool inverse = false;
+	public bool powerUp = false;
 
     private void Start()
     {
@@ -86,7 +87,7 @@ public class CarController : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         if (GetComponent<Rigidbody>().velocity.x != 0 || GetComponent<Rigidbody>().velocity.z != 0)
         {
-			if inverse {transform.Rotate(Vector3.up * turnpower);}
+			if (inverse) {transform.Rotate(Vector3.up * turnpower);}
             else{transform.Rotate(Vector3.up * -turnpower);}
         }
     }
@@ -95,14 +96,17 @@ public class CarController : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         if (GetComponent<Rigidbody>().velocity.x != 0 || GetComponent<Rigidbody>().velocity.z != 0)
         {
-            if inverse {transform.Rotate(Vector3.up * -turnpower);}
+            if (inverse) {transform.Rotate(Vector3.up * -turnpower);}
             else{transform.Rotate(Vector3.up * turnpower);}
         }
     }
 
     public void lancerCoroutine(float duration, float newPower)
     {
-        StartCoroutine(applyPowerUp(duration, newPower));
+		if (powerUp == false) {
+			powerUp = true;
+			StartCoroutine(applyPowerUp(duration, newPower));
+		}
     }
 
     public IEnumerator applyPowerUp(float duration, float newPower)
@@ -113,10 +117,12 @@ public class CarController : MonoBehaviourPun, IPunInstantiateMagicCallback
 			yield return new WaitForSeconds(duration);
 			this.maxPower = baseMaxPower;
 			this.power = baseMaxPower;
+			powerUp = false;
 		}else{
 			inverse = true;
 			yield return new WaitForSeconds(duration);
 			inverse = false;
+			powerUp = false;
 		}
         
     }
