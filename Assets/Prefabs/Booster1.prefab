@@ -75,6 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c243cdd380ee3a4591357aea92a7f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countdown: 3
+  vitesse: 200
 --- !u!1 &1330249887881900532
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +136,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 035900020b240f74a9ce800be63862c3, type: 2}
+  - {fileID: 2100000, guid: b2c0a3ade49654a0583098e25e709f29, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
