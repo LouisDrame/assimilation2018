@@ -13,6 +13,7 @@ public class CarController : MonoBehaviourPun, IPunInstantiateMagicCallback
     public float turnpower = 2;
     public float friction = 3;
     public bool isBandit;
+    public float health = 3;
     public bool inputBlocked;
     private Rigidbody rigidbody;
     private float savePower;
@@ -123,6 +124,18 @@ public class CarController : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     public void DisableInput(){
         this.inputBlocked = true;
+    }
+
+    public void OnTriggerEnter(Collider other) {
+        if(other.gameObject.GetComponent<CarController>()){
+            if(other.gameObject.GetComponent<CarController>().isBandit){
+                other.gameObject.GetComponent<CarController>().decrementHelath();
+            }
+        }
+    }
+
+    public void decrementHelath(){
+        health --;
     }
 
 }
