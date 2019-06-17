@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CarController : MonoBehaviourPun
+public class CarController : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     public float power; /*!< Puissance courante du véhicule, est initialisée à la valeur prise par minPower en début de jeu */
     public float maxPower = 100; /*!< Puissance maximum courante du véhicule, peut être modifiée par les bonus, la puissance courante du véhicule ne peut pas dépasser cette valeur */
@@ -12,6 +12,8 @@ public class CarController : MonoBehaviourPun
     public float accelerationValueFloat = 30f; /*!< Valeur d'accélération */
     public float turnpower = 2;
     public float friction = 3;
+    public bool isBandit;
+    public bool inputBlocked;
     private Rigidbody rigidbody;
     private float savePower;
 
@@ -31,35 +33,37 @@ public class CarController : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-
-            if (Input.GetKey(KeyCode.Z))
+            if (!inputBlocked)
             {
-                Up();
-                power += accelerationValueFloat * Time.fixedDeltaTime;
-                if (power >= maxPower)
+                if (Input.GetKey(KeyCode.Z))
                 {
-                    power = maxPower;
+                    Up();
+                    power += accelerationValueFloat * Time.fixedDeltaTime;
+                    if (power >= maxPower)
+                    {
+                        power = maxPower;
+                    }
                 }
-            }
-            else
-            {
-                power -= accelerationValueFloat * 2 * Time.fixedDeltaTime;
-                if (power <= minPower)
+                else
                 {
-                    power = minPower;
+                    power -= accelerationValueFloat * 2 * Time.fixedDeltaTime;
+                    if (power <= minPower)
+                    {
+                        power = minPower;
+                    }
                 }
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                Down();
-            }
-            if (Input.GetKey(KeyCode.Q))
-            {
-                Left();
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                Right();
+                if (Input.GetKey(KeyCode.S))
+                {
+                    Down();
+                }
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    Left();
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    Right();
+                }
             }
             // Debug.Log("Current power :" + power);
         }
@@ -105,6 +109,20 @@ public class CarController : MonoBehaviourPun
         yield return new WaitForSeconds(duration);
         this.maxPower = baseMaxPower;
         this.power = baseMaxPower;
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        Debug.Log("Object instantiates, is Bandit :" + this.isBandit);
+        info.Sender.TagObject = this.gameObject;
+    }
+
+    public void EnableInput(){
+        this.inputBlocked = false;
+    }
+
+    public void DisableInput(){
+        this.inputBlocked = true;
     }
 
 }

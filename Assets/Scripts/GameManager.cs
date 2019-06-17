@@ -5,11 +5,13 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+
 public class GameManager : MonoBehaviourPunCallbacks
 {
 
     [Tooltip("The prefab to use for representing the player")]
-    public Transform StartPos;
+    public Transform StartPosCop, StartPosThief;
     private GameObject InstantiateCar;
 
     #region Photon Callbacks
@@ -28,14 +30,15 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-      Debug.Log("Start");
+        Debug.Log("Start");
         if (PhotonNetwork.IsMasterClient)
         {
-            InstantiateCar = PhotonNetwork.Instantiate("Police", StartPos.position, Quaternion.identity, 0);
+            InstantiateCar = PhotonNetwork.Instantiate("Police", StartPosCop.position, StartPosCop.rotation, 0);
         }
         else
         {
-            InstantiateCar = PhotonNetwork.Instantiate("Bandit", StartPos.position, Quaternion.identity, 0);
+            InstantiateCar = PhotonNetwork.Instantiate("Bandit", StartPosThief.position, Quaternion.identity, 0);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable(){{"GameStart",true}});
         }
     }
 
@@ -70,6 +73,22 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
-    #endregion
+    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged){
+        object gameStart = propertiesThatChanged["GameStart"];
+        object gameStartForCop = propertiesThatChanged["GameStartForCop"];
+        if(gameStart is bool && (bool) gameStart){
+            Debug.Log("Debut du jeu");
+            if(InstantiateCar.GetComponent<CarController>().isBandit){
+                InstantiateCar.GetComponent<CarController>().EnableInput();
+            }
+        }
 
+        if(gameStartForCop is bool && (bool)gameStartForCop){
+            if(!InstantiateCar.GetComponent<CarController>().isBandit){
+                InstantiateCar.GetComponent<CarController>().EnableInput();
+            }
+        }
+
+    }
+    #endregion
 }
