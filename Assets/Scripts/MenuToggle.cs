@@ -5,13 +5,10 @@ using UnityEngine;
 public class MenuToggle : MonoBehaviour
 {
     public GameObject pauseMenu;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //Script permettant d'afficher ou cacher le menu passé en variable publique "pauseMenu"
+    //L'affichage s'active/se désactive avec Echap
+    //Utilisé pour ouvrir un menu en jeu
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape)){

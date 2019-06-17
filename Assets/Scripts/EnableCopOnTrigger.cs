@@ -6,7 +6,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class EnableCopOnTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Script utilisé pour activer les inputs pour le policier en début de partie
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<CarController>())

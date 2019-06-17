@@ -6,17 +6,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class FinishLineTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //Script utilisé pour déclencher la victoire du bandit en cas de traversée de la ligne d'arrivée
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.GetComponent<CarController>()){
